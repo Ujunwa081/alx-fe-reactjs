@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from "react";
+import React from "react";   // ✅ import statement present
 
 function App() {
   return (
