@@ -5,7 +5,7 @@ function App() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Search query:", query);
+    // You can call fetchUserData(query) here later if needed
   };
 
   return (
@@ -19,7 +19,7 @@ function App() {
           onChange={(e) => setQuery(e.target.value)}
         />
         <button type="submit">Search</button>
-      </form>
+      </form> {/* ✅ this was missing */}
     </div>
   );
 }
