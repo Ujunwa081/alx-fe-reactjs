@@ -1,14 +1,14 @@
 // src/App.jsx
-import React from "react";   // ✅ import statement present
+import React from "react";
+import Search from "./components/Search";
 
 function App() {
   return (
-    <div>
+    <div style={{ padding: "1.5rem", fontFamily: "sans-serif" }}>
       <h1>GitHub User Search App</h1>
-      <p>Setup is complete. Ready for development 🚀</p>
+      <Search />
     </div>
   );
 }
 
 export default App;
-
