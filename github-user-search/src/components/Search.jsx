@@ -5,7 +5,7 @@ export default function Search() {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,11 +13,11 @@ export default function Search() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUser(null);
+    setUsers([]);
 
     try {
       const data = await fetchUserData(username, location, minRepos);
-      setUser(data);
+      setUsers(data);
     } catch (err) {
       setError("Looks like we can't find the user");
     } finally {
@@ -60,26 +60,33 @@ export default function Search() {
       <div className="mt-4">
         {loading && <p>Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {user && (
-          <div className="p-4 border rounded shadow">
-            <img
-              src={user.avatar_url}
-              alt={user.login}
-              className="w-16 h-16 rounded-full"
-            />
-            <h2 className="text-xl font-bold">{user.login}</h2>
-            <p>Location: {user.location || "Not specified"}</p>
-            <p>Repos: {user.public_repos}</p>
-            <a
-              href={user.html_url}
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 underline"
+
+        {users.length > 0 &&
+          users.map((user) => (
+            <div
+              key={user.id}
+              className="p-4 border rounded shadow mb-2 flex items-center space-x-4"
             >
-              View Profile
-            </a>
-          </div>
-        )}
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="w-16 h-16 rounded-full"
+              />
+              <div>
+                <h2 className="text-xl font-bold">{user.login}</h2>
+                <p>Location: {user.location || "Not specified"}</p>
+                <p>Repos: {user.public_repos}</p>
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  View Profile
+                </a>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
