@@ -2,7 +2,7 @@ import React from 'react';
 
 const MainContent = () => {
   return (
-    <main>
+    <main style={{ padding: '20px', textAlign: 'center', fontSize: '18px', lineHeight: '1.6' }}>
       <p>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
